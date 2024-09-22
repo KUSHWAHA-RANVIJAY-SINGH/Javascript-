@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        *{
+            margin: 0; 
+            padding: 0;
+            box-sizing: border-box;}
+        header{
+           width: 100%; 
+           height: 15vh;
+           background-color: #20bfc6;
+        }
+        h1{
+            text-align: center;
+            color: rgb(218, 9, 215);
+            font-size: 1.8rem;
+            letter-spacing: 15x;
+            text-shadow: 0 1px 0 #efefef,
+                         0 2px 0 #efefef,
+                         0 3px 0 #efefef,
+                         0 4px 0 #efefef,
+                         0 30px 5px rgba(0,0,0,.1);
+                         font-family: "Roboto", sans-serif;
+         font-weight: 400;
+         font-style: normal;
+        }
+        header{
+            width: 100%;
+            height: 15vh;
+            background-color: #20bf6b;
+        }
+        section{
+            height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #7bed9f;
+        }
+        .gameArea{
+            width: 50%;
+            height: 400px;
+            padding: 20px 0;
+            background-color: #2ed573;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn{
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+
+        }
+        h3{
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        input{
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 25px;
+            outline: none;
+            border: none;
+            background-color: #dff9fb;
+            color: black;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+        button{
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            border: #2f3542;
+            text-decoration: none;
+            margin-top: 10px;
+            color: #ed4d4b;
+            border-radius: 25px;
+ 
+        }
+        button.btn{
+    
+            font-weight: 600;
+            padding: 1rem 2rem;
+            background: white;
+            text-transform: uppercase;
+            transition-property: all;
+            transition-duration: 0.5s;
+            transition-timing-function: cubic-bezier(0.65,-0.25,0.25,1.95);
+        }
+        button.btn:hover ,button.btn:focus,button.btn:active{
+            letter-spacing: 0.125rem;
+            word-spacing: 0.2rem;
+        }
+        .hidden{
+           display: none; 
+        }
+    </style>
+    <title>Guess the word game</title>
+</head>
+<body>
+    <header>
+        <h1>Guess the word game</h1>
+    </header>
+    <section>
+    <div class="gameArea">
+        <h3 class="msg"></h3>
+        <input type="text" class="hidden">
+        <button class="btn">Click here to start</button>
+    </div>
+</section>
+
+
+<script>
+    const msg =document.querySelector('.msg');
+    const guess= document.querySelector('input');
+    const btn=document.querySelector('.btn');
+    let play =false;
+    let newWords="";
+    let ranWords="";
+    let swords =['Python', 'Java', 'C++', 'C#', 'JavaScript', 'Ruby', 'PHP', 'Swift',  'Kotlin', 'Rust', 'Perl', 'Dart', 'TypeScript']
+
+    const creteNewWords =()=>{
+        let ranNum =Math.floor( Math.random()* swords.length);
+        let newTempSwords = swords[ranNum];
+        console.log(newTempSwords);
+        
+        return newTempSwords;
+    }
+    const scracablewords = (arr)=>{
+        for(let i =arr.length-1;i>=0;i--){
+            let temp =arr[i];
+            console.log(temp);
+            let j= Math.floor(Math.random()*(i+1));
+            // console.log(i);
+            // console.log(j);/
+            arr[i]=arr[j];
+            arr[j]=temp;
+           
+        }
+        return arr;
+    }
+    btn.addEventListener('click',function(){
+        if(!play){
+            play=true;
+            btn.innerHTML = "Guess";
+          guess.classList.toggle('hidden');
+
+            newWords =creteNewWords();
+            ranWords = scracablewords(newWords.split("")).join("");
+            console.log(ranWords);
+            msg.innerHTML=`Guess the word: ${ranWords}`;
+            
+        }else{
+            let tempWord = guess.value;
+            if(tempWord === newWords){
+                console.log('Correct ');
+                play =false;
+                msg.innerHTML =` Awesome It's Correct . it is ${newWords}`;
+                btn.innerHTML= "Start Again";
+                guess.classList.toggle('hidden');
+                guess.value="";
+
+            }
+            else{
+                console.log('Incorrect ');
+                msg.innerHTML =` Oops It's Incorrect . it is ${ranWords}`
+              
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>
