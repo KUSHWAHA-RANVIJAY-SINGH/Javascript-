@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="blue">Blue</button>
+        <button id="black">Black</button>
+        <button id="YellowGreen">YellowGreen</button>
+        <button id="Green">Green</button>
+    </div>
+
+</body>
+</html>
+<script>
+    // Get the buttons
+    var blue = document.getElementById("blue");
+    blue.style.backgroundColor='blue'
+    blue.addEventListener('click' ,function(event){
+        event.preventDefault();
+        document.body.style.backgroundColor ='blue'
+    })
+    var black = document.getElementById("black");
+    black.style.backgroundColor='black'
+    black.style.color = 'white'
+    black.addEventListener('click' ,function(event){
+        document.body.style.backgroundColor = 'black'
+        event.preventDefault();
+    })
+
+    var YellowGreen = document.getElementById('YellowGreen');
+    YellowGreen.style.backgroundColor='yellowgreen'
+    YellowGreen.addEventListener('click',function(event){
+        event.preventDefault();
+        document.body.style.backgroundColor = 'yellowgreen'
+        
+    })
+    var Green = document.getElementById('Green');
+    Green.style.backgroundColor='green'
+    Green.addEventListener('click',function(event){
+        event.preventDefault();
+        document.body.style.backgroundColor = 'green'
+    })
+</script>
